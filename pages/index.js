@@ -13,22 +13,39 @@ import {withStyles} from '@material-ui/core/styles';
 import Link from 'next/link';
 import {Query} from 'react-apollo'
 import gql from 'graphql-tag'
+import PortfolioCard from "../components/card";
+import formatDistance from 'date-fns/formatDistance'
+import Grid from '@material-ui/core/Grid';
 
 const styles = theme => ({
     root: {
         textAlign: 'center',
         paddingTop: theme.spacing.unit * 20,
     },
+    contentContainer: {
+        maxWidth: '1200px',
+        margin: 'auto'
+    }
 });
 
 export const allPostsQuery = gql`
     query{
-        projects {
+        projects{
             id
             title
             description
+            createdAt
             cover{
+                id
                 handle
+            }
+            authors{
+                id
+                name
+                image{
+                    id
+                    handle
+                }
             }
         }
     }
@@ -92,25 +109,22 @@ class Index extends React.Component {
                     {({loading, error, data: {projects}}) => {
                         if (loading) return <div>Loading</div>
                         return (
-                            <section>
-                                <ul>
-                                    {projects.map((project, index) => (
-                                        <li key={project.id}>
-                                            <div>
-                                                <img src={`https://media.graphcms.com/resize=width:60/${project.cover.handle}`}/>
-                                                <span>{index + 1}. </span>
-                                                <a>{project.title}</a>
-                                            </div>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </section>
+                            <Grid container spacing={24} className={classes.contentContainer}>
+                                {projects.map((project, index) => (
+                                    <Grid item xs={4} key={index}>
+                                        <PortfolioCard
+                                            title={project.title}
+                                            description={project.description}
+                                            cover={project.cover.handle}
+                                            author={project.authors[0]}
+                                            date={formatDistance(new Date(project.createdAt), new Date(), {addSuffix: true})}
+                                        />
+                                    </Grid>
+                                ))}
+                            </Grid>
                         )
                     }}
                 </Query>
-                <Button variant="contained" color="secondary" onClick={this.handleClick}>
-                    Super Secret Password
-                </Button>
             </div>
         );
     }
