@@ -27,6 +27,9 @@ export const allPostsQuery = gql`
             id
             title
             description
+            cover{
+                handle
+            }
         }
     }
 `
@@ -94,6 +97,7 @@ class Index extends React.Component {
                                     {projects.map((project, index) => (
                                         <li key={project.id}>
                                             <div>
+                                                <img src={`https://media.graphcms.com/resize=width:60/${project.cover.handle}`}/>
                                                 <span>{index + 1}. </span>
                                                 <a>{project.title}</a>
                                             </div>
