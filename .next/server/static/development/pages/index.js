@@ -1420,7 +1420,7 @@ __webpack_require__.r(__webpack_exports__);
 var _jsxFileName = "/Users/renefuchtenkordt/IdeaProjects/nextjs-dci/pages/index.js";
 
 function _templateObject() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_7__["default"])(["\n    query allPosts($first: Int!, $skip: Int!) {\n        allPosts(orderBy: createdAt_DESC, first: $first, skip: $skip) {\n            id\n            title\n            votes\n            url\n            createdAt\n        }\n    }\n"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_7__["default"])(["\n    query{\n        projects {\n            id\n            title\n            description\n        }\n    }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -1505,7 +1505,7 @@ function (_React$Component) {
         className: classes.root,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 67
+          lineNumber: 65
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_material_ui_core_Dialog__WEBPACK_IMPORTED_MODULE_11___default.a, {
@@ -1513,31 +1513,31 @@ function (_React$Component) {
         onClose: this.handleClose,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 68
+          lineNumber: 66
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_12___default.a, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 69
+          lineNumber: 67
         },
         __self: this
       }, "Super Secret Password"), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_13___default.a, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 70
+          lineNumber: 68
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_material_ui_core_DialogContentText__WEBPACK_IMPORTED_MODULE_14___default.a, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 71
+          lineNumber: 69
         },
         __self: this
       }, "1-2-3-4-5")), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_15___default.a, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 73
+          lineNumber: 71
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_10___default.a, {
@@ -1545,7 +1545,7 @@ function (_React$Component) {
         onClick: this.handleClose,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 74
+          lineNumber: 72
         },
         __self: this
       }, "OK"))), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_16___default.a, {
@@ -1553,7 +1553,7 @@ function (_React$Component) {
         gutterBottom: true,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 79
+          lineNumber: 77
         },
         __self: this
       }, "Material-UI"), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_16___default.a, {
@@ -1561,96 +1561,86 @@ function (_React$Component) {
         gutterBottom: true,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 82
+          lineNumber: 80
         },
         __self: this
       }, "example project"), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_16___default.a, {
         gutterBottom: true,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 85
+          lineNumber: 83
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_18___default.a, {
         href: "/about",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 86
+          lineNumber: 84
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 87
+          lineNumber: 85
         },
         __self: this
       }, "Go to the about page"))), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(react_apollo__WEBPACK_IMPORTED_MODULE_19__["Query"], {
         query: allPostsQuery,
-        variables: allPostsQueryVars,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 90
+          lineNumber: 88
         },
         __self: this
       }, function (_ref) {
         var loading = _ref.loading,
             error = _ref.error,
-            allPosts = _ref.data.allPosts;
-        if (error) return react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(ErrorMessage, {
-          message: "Error loading posts.",
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 92
-          },
-          __self: this
-        });
+            projects = _ref.data.projects;
         if (loading) return react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 93
+            lineNumber: 90
           },
           __self: this
         }, "Loading");
         return react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("section", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 96
+            lineNumber: 92
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("ul", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 97
+            lineNumber: 93
           },
           __self: this
-        }, allPosts.map(function (post, index) {
+        }, projects.map(function (project, index) {
           return react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("li", {
-            key: post.id,
+            key: project.id,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 99
+              lineNumber: 95
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("div", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 100
+              lineNumber: 96
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("span", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 101
+              lineNumber: 97
             },
             __self: this
           }, index + 1, ". "), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement("a", {
-            href: post.url,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 102
+              lineNumber: 98
             },
             __self: this
-          }, post.title)));
+          }, project.title)));
         })));
       }), react__WEBPACK_IMPORTED_MODULE_8___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_10___default.a, {
         variant: "contained",
@@ -1658,7 +1648,7 @@ function (_React$Component) {
         onClick: this.handleClick,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 111
+          lineNumber: 107
         },
         __self: this
       }, "Super Secret Password"));

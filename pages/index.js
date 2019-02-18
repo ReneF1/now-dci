@@ -22,13 +22,11 @@ const styles = theme => ({
 });
 
 export const allPostsQuery = gql`
-    query allPosts($first: Int!, $skip: Int!) {
-        allPosts(orderBy: createdAt_DESC, first: $first, skip: $skip) {
+    query{
+        projects {
             id
             title
-            votes
-            url
-            createdAt
+            description
         }
     }
 `
@@ -87,19 +85,17 @@ class Index extends React.Component {
                         <a>Go to the about page</a>
                     </Link>
                 </Typography>
-                <Query query={allPostsQuery} variables={allPostsQueryVars}>
-                    {({loading, error, data: {allPosts}}) => {
-                        if (error) return <ErrorMessage message='Error loading posts.'/>
+                <Query query={allPostsQuery}>
+                    {({loading, error, data: {projects}}) => {
                         if (loading) return <div>Loading</div>
-
                         return (
                             <section>
                                 <ul>
-                                    {allPosts.map((post, index) => (
-                                        <li key={post.id}>
+                                    {projects.map((project, index) => (
+                                        <li key={project.id}>
                                             <div>
                                                 <span>{index + 1}. </span>
-                                                <a href={post.url}>{post.title}</a>
+                                                <a>{project.title}</a>
                                             </div>
                                         </li>
                                     ))}
