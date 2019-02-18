@@ -109,7 +109,7 @@ class Index extends React.Component {
                     {({loading, error, data: {projects}}) => {
                         if (loading) return <div>Loading</div>
                         return (
-                            <Grid container spacing={24} className={classes.contentContainer}>
+                            <Grid container justify='space-around' spacing={24} className={classes.contentContainer}>
                                 {projects.map((project, index) => (
                                     <Grid item xs={4} key={index}>
                                         <PortfolioCard
