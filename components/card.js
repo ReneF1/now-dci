@@ -6,10 +6,10 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Link from 'next/link';
+
 
 const styles = theme => ({
     card: {
@@ -45,35 +45,34 @@ class PortfolioCard extends React.Component {
     };
 
     render() {
-        const {classes, title, description, cover, author, date} = this.props;
-
+        const {classes, title, description, cover, author, date, slug} = this.props;
         return (
-            <Card className={classes.card}>
-                <CardHeader
-                    avatar={
-                        <Avatar aria-label="Recipe" className={classes.avatar}>
-                            <img src={`https://media.graphcms.com/resize=width:60/${author.image.handle}`}/>
-                        </Avatar>
-                    }
-                    action={
-                        <IconButton>
-                            <MoreVertIcon/>
-                        </IconButton>
-                    }
-                    title={title}
-                    subheader={date}
-                />
-                <CardMedia
-                    className={classes.media}
-                    image={`https://media.graphcms.com/resize=width:400/${cover}`}
-                    title="Paella dish"
-                />
-                <CardContent>
-                    <Typography component="p">
-                        {description}
-                    </Typography>
-                </CardContent>
-            </Card>
+            <Link prefetch href={{pathname: '/post', query: {slug: slug}}}>
+                <Card className={classes.card}>
+                    <CardHeader
+                        avatar={
+                            <Avatar aria-label="Recipe" className={classes.avatar}>
+                                <img src={`https://media.graphcms.com/resize=width:60/${author.image.handle}`}/>
+                            </Avatar>
+                        }
+                        title={author.name}
+                        subheader={date}
+                    />
+                    <CardMedia
+                        className={classes.media}
+                        image={`https://media.graphcms.com/resize=width:400/${cover}`}
+                        title="Paella dish"
+                    />
+                    <CardContent>
+                        <Typography component="p" variant='h6'>
+                            {title}
+                        </Typography>
+                        <Typography component="p">
+                            {description}
+                        </Typography>
+                    </CardContent>
+                </Card>
+            </Link>
         );
     }
 }
