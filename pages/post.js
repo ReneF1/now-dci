@@ -9,6 +9,7 @@ import SimpleAppBar from "../components/menuBar";
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import ReactMarkdown from 'react-markdown'
+import Pagination from "../components/pagination";
 
 const styles = theme => ({
     root: {
@@ -22,14 +23,27 @@ const styles = theme => ({
 export const allPostsQuery = gql`
     query($slug: String){
         projects(where: {slug: $slug}){
+            id
             title
             text
         }
     }
 `
-export const allPostsQueryVars = (slug) => {
-    return {slug: slug}
-}
+
+export const PaginationQuery = gql`
+    query($postId: String){
+        previousProject: projects(last:1, before: $postId ){
+            title
+            slug
+            id
+        }
+        nextProject: projects(first:1, after: $postId){
+            title
+            slug
+            id
+        }
+    }
+`
 
 class Post extends React.Component {
     static getInitialProps({query}) {
@@ -38,23 +52,32 @@ class Post extends React.Component {
     }
 
     render() {
-        const {classes} = this.props;
+        const {classes, query} = this.props;
         return (
             <div className={classes.root}>
                 <SimpleAppBar title={"Rene's Blog"}/>
-                <Query query={allPostsQuery} variables={allPostsQueryVars(this.props.query.slug)}>
+                <Query query={allPostsQuery} variables={{slug: query.slug}}>
                     {({loading, error, data: {projects}}) => {
                         if (loading) return <div>Loading</div>
                         return (
                             <Grid container spacing={24} justify='space-evenly' className={classes.contentContainer}>
-                                {projects.map((project, index) => (
-                                    <Grid item xs={12} key={index}>
-                                        <Typography component="p" variant='h1'>
-                                            {project.title}
-                                        </Typography>
-                                        <ReactMarkdown source={project.text} />
-                                    </Grid>
-                                ))}
+                                <Grid item xs={12}>
+                                    <Typography component="p" variant='h1'>
+                                        {projects[0].title}
+                                    </Typography>
+                                    <ReactMarkdown source={projects[0].text}/>
+                                </Grid>
+                                <Query query={PaginationQuery} variables={{postId: projects[0].id}}>
+                                    {({loading, data: {previousProject, nextProject}}) => {
+                                        if (loading) return <div>Loading</div>
+                                        return (
+                                            <Grid item xs={12}>
+
+                                                <Pagination previous={previousProject[0]} next={nextProject[0]}/>
+                                            </Grid>
+                                        )
+                                    }}
+                                </Query>
                             </Grid>
                         )
                     }}
