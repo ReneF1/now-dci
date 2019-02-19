@@ -12,11 +12,13 @@
     "graphql": "^14.0.2",
     "isomorphic-unfetch": "^3.0.0",
     "jss": "latest",
+    "lodash": "^4.17.11",
     "next": "^8.0.0",
     "prop-types": "latest",
     "react": "^16.7.0",
     "react-apollo": "^2.1.11",
     "react-dom": "^16.7.0",
-    "react-jss": "^8.1.0"
+    "react-jss": "^8.1.0",
+    "react-markdown": "^4.0.6"
   }
 }
